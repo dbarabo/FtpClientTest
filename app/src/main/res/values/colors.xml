@@ -3,4 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorBackgroundText">#ffffff</color>
+    <color name="colorText">#000000</color>
+
+    <color name="colorBackgroundMainTitle">#00b2ff</color>
+    <color name="colorMainTitle">#ffffff</color>
+
+    <color name="colorButton">#0a0a0a</color>
+
+    <color name="colorBackgroundInfoPhone">#0096ff</color>
+    <color name="colorInfoPhone">#000000</color>
+    <color name="colorHyperLinkInfoPhone">#ffffff</color>
 </resources>

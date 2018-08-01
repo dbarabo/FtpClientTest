@@ -1,4 +1,4 @@
-package ru.barabo.ftpclienttest.gui
+package ru.barabo.carwash.gui
 
 import android.graphics.Color
 import android.os.AsyncTask
@@ -14,7 +14,7 @@ import android.widget.TextView
 import ru.barabo.ftpclient.FileNameType
 import ru.barabo.ftpclient.FileTypeFtp
 import ru.barabo.ftpclient.FtpObject
-import ru.barabo.ftpclienttest.R
+import ru.barabo.carwash.R
 
 
 class FtpListFragment : Fragment() {

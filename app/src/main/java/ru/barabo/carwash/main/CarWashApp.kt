@@ -1,11 +1,11 @@
-package ru.barabo.ftpclienttest.main
+package ru.barabo.carwash.main
 
 import android.app.Application
 
-class FtpClientApp : Application() {
+class CarWashApp : Application() {
 
     companion object {
-        lateinit var instance: FtpClientApp
+        lateinit var instance: CarWashApp
     }
 
     override fun onCreate() {

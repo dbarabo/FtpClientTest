@@ -10,9 +10,26 @@ open class FtpInstance(private val ftpProp: FtpProp): Ftp {
 
     companion object {
         private const val BUFFER_SIZE = 1024 * 1024
+
+        private const val ERROR_ACCESS_FTP = "Ошибка соединения с сервером :( "
     }
 
     private val ftpClient = FTPClient()
+
+
+    override fun readTextFile(remoteFullPath: String): String {
+        connectTry()
+
+        val text = try {
+            ftpClient.retrieveFileStream(remoteFullPath).bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            "$ERROR_ACCESS_FTP ${e.message}"
+        }
+
+        disconnect()
+
+        return text
+    }
 
     override fun downloadFile(remoteFullPath: String, localFile: File) {
 

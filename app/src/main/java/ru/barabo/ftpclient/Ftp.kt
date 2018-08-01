@@ -7,5 +7,7 @@ interface Ftp {
 
     fun downloadFile(remoteFullPath: String, localFile: File)
 
+    fun readTextFile(remoteFullPath: String): String
+
     fun listFiles(ftpPath: String): Array<FTPFile>?
 }

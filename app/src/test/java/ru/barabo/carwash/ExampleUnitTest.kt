@@ -1,4 +1,4 @@
-package ru.barabo.ftpclienttest
+package ru.barabo.carwash
 
 import org.junit.Test
 
