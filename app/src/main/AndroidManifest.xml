@@ -8,7 +8,7 @@
         android:name="ru.barabo.carwash.main.CarWashApp"
         android:allowBackup="true"
         android:icon="@drawable/ico72"
-        android:label="Автомойка Новый Уровень"
+        android:label="Автомойка ТЦ «Стройматериалы"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

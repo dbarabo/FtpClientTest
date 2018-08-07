@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">НОВЫЙ УРОВЕНЬ\nавтомойка ИП Бондарчук А.А. п.Новый\n </string>
-    <string name="price_title">НОВЫЙ УРОВЕНЬ\nПрайс\n </string>
+    <string name="app_name">АВТОМОЙКА\nТЦ «Стройматериалы»</string>
+    <string name="price_title">АВТОМОЙКА ТЦ «Стройматериалы»\nПрайс\n </string>
+    <string name="price_name">Прайс...</string>
 </resources>

@@ -32,11 +32,11 @@ class FtpTextAllFragment : Fragment() {
 
     private var messageTextServer: TextView? = null
 
-    private var priceTextServer: TextView? = null
-
     private var infoTextServer: TextView? = null
 
     private var phoneTextServer: TextView? = null
+
+    private var htmlPhone: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -53,8 +53,6 @@ class FtpTextAllFragment : Fragment() {
         messageTextServer = viewFragment.findViewById(R.id.messageTextServer)
 
         messageTextServer?.text = "Wait repeat info from server..."
-
-        priceTextServer = viewFragment.findViewById(R.id.priceTextServer)
 
         infoTextServer = viewFragment.findViewById(R.id.infoTextServer)
 
@@ -106,40 +104,45 @@ class FtpTextAllFragment : Fragment() {
 
         override fun onPostExecute(result: Unit?) {
 
-            val textView = messageTextServer ?: return
-            synchronized(textView.text) {
-                textView.text = FtpObject.textServer
-            }
+            setPhoneServer()
 
-            setPriceHeader()
+            setTextServer()
 
             val infoView = infoTextServer ?: return
             synchronized(infoView.text) {
                 infoView.text = FtpObject.infoServer
             }
 
-            setPhoneServer()
         }
 
-        private fun setPriceHeader() {
-            val priceView = priceTextServer ?: return
+        private fun setTextServer() {
+            val textView = messageTextServer ?: return
 
-            val lines = FtpObject.priceServer?.lines()?.take(3)?.joinToString("\n")
-
-            synchronized(priceView.text) {
-                priceView.text = lines
+            synchronized(textView.text) {
+                textView.text = concatServerTextPhone(FtpObject.textServer, htmlPhone)
             }
         }
+
+        private fun concatServerTextPhone(textServer: String?, htmlPhone: String?): CharSequence? {
+            return textServer
+
+            if(textServer == null || htmlPhone == null) return null
+
+            val allText = textServer + htmlPhone
+
+            return Html.fromHtml(allText)
+        }
+
 
         private fun setPhoneServer() {
             val phoneView = phoneTextServer ?: return
 
             val phoneNumber = FtpObject.phoneServer ?: return
 
-            val htmlPhone = Html.fromHtml("<a href=\"tel:+$phoneNumber\">+$phoneNumber</a>")
+            htmlPhone = "<a href=\"tel:+$phoneNumber\">+$phoneNumber</a>"
 
             synchronized(phoneView.text) {
-                phoneView.text = htmlPhone
+                phoneView.text = Html.fromHtml(htmlPhone)
                 phoneView.movementMethod = LinkMovementMethod.getInstance()
                 phoneView.autoLinkMask = Linkify.PHONE_NUMBERS;
 

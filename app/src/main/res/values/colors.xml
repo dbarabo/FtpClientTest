@@ -7,12 +7,16 @@
     <color name="colorBackgroundText">#ffffff</color>
     <color name="colorText">#000000</color>
 
-    <color name="colorBackgroundMainTitle">#00b2ff</color>
+    <color name="colorBackgroundMainTitle">#303F9F</color>
     <color name="colorMainTitle">#ffffff</color>
 
     <color name="colorButton">#0a0a0a</color>
 
-    <color name="colorBackgroundInfoPhone">#0096ff</color>
-    <color name="colorInfoPhone">#000000</color>
-    <color name="colorHyperLinkInfoPhone">#ffffff</color>
+    <color name="colorBackgroundInfoPhone">#303F9F</color>
+    <color name="colorInfoPhone">#ffffff</color>
+    <color name="colorHyperLinkInfoPhone">#4fcaff</color>
+    <color name="colorHyperLinkServerPhone">#476ff2</color>
+
+    <color name="colorPrice0BackGround">#303F9F</color>
+    <color name="colorPrice1BackGround">#1c255d</color>
 </resources>

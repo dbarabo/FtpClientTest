@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/priceRecyclerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".gui.PriceActivity"
-    android:background="@color/colorBackgroundText">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/allPriceText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="..."
-        android:textSize="20sp"
-        android:textColor="@color/colorText"
-        android:background="@color/colorBackgroundText"
-        />
-</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.RecyclerView>

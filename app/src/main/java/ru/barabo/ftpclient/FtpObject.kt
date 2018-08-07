@@ -5,27 +5,15 @@ import java.util.*
 
 private val ftpProp = FtpProp("80.92.164.204", "konordvr", "fW50A7t8zv", isPassiveMode=true)
 
-enum class FileTypeFtp {
-    DIRECTORY,
-    FILE,
-    NULL;
-
-    companion object {
-        fun getFileTypeFtp(isDirectory: Boolean) = if(isDirectory) DIRECTORY else FILE
-    }
-}
-
-typealias FileNameType = Pair<String, FileTypeFtp>
-
 object FtpObject : FtpInstance(ftpProp) {
-
-    private var activeDir: List<FileNameType>? = null
 
     var textServer: String? = null
     private set
 
     var priceServer: String? = null
     private set
+
+    var priceItems: List<List<String>>? = null
 
     var infoServer: String? = null
     private set
@@ -34,27 +22,11 @@ object FtpObject : FtpInstance(ftpProp) {
     private set
 
     @Synchronized
-    fun initActiveDir() {
-        activeDir = getRootListFiles()
-    }
+    fun getPriceCount() = priceItems?.size?:0
 
     @Synchronized
-    fun getRootCountFiles(): Int = activeDir?.size ?: 0
-
-    @Synchronized
-    fun getActiveDirItemByIndex(index: Int): FileNameType =
-            if(index >= 0 && activeDir?.size?:0 > index ) activeDir!![index] else FileNameType("", FileTypeFtp.NULL)
-
-    private fun getRootListFiles(): List<FileNameType> {
-
-        val result = ArrayList<FileNameType>()
-
-        this.listFiles("")?.forEach {
-            result += Pair(it.name, FileTypeFtp.getFileTypeFtp(it.isDirectory))
-        }
-
-        return result
-    }
+    fun getPriceItem(position: Int): List<String>? =
+            if(priceItems?.size?:0 > position)priceItems!![position] else null
 
     @Synchronized
     fun initReadServerText() {
@@ -62,7 +34,7 @@ object FtpObject : FtpInstance(ftpProp) {
 
         textServer = textServer?.substringBeforeLast("-----")
 
-        priceServer = priceServer?:readTextFile("/ftp/price.txt")
+        priceServer = priceServer?:readPrice()
 
         infoServer = infoServer?:readTextFile("/ftp/info.txt")
 
@@ -75,5 +47,13 @@ object FtpObject : FtpInstance(ftpProp) {
         infoServer = this.substringBeforeLast('+')
 
         return result
+    }
+
+    private fun readPrice(): String {
+        priceServer = readTextFile("/ftp/price.txt")
+
+        priceItems = priceServer?.lines()?.drop(1)?.map { it.split("\\.\\.\\.\\.\\.".toRegex())  }
+
+        return priceServer!!
     }
 }
