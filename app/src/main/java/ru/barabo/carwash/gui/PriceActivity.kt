@@ -98,8 +98,8 @@ class PriceActivity : AppCompatActivity() {
 
     data class PriceItem(val name: String="", val amount: String="", val isDec: Boolean = true) {
         constructor(items: List<String>?, position: Int) : this(
-                if(items?.size?:0 > 0)items!![0]?:"" else "",
-                if(items?.size?:0 > 1)items!![1]?:"" else "",
+                if(items?.size?:0 > 0)items!![0] else "",
+                if(items?.size?:0 > 1)items!![1] else "",
                 position%2==0
         )
     }

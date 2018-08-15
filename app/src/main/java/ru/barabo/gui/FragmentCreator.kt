@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.FrameLayout
 
 interface FragmentCreator {
+
     fun createFragment(): Fragment
 
     fun addFragment(resourceLayout: Int) {

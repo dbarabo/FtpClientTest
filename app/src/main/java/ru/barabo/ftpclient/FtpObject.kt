@@ -7,6 +7,8 @@ private val ftpProp = FtpProp("80.92.164.204", "konordvr", "fW50A7t8zv", isPassi
 
 object FtpObject : FtpInstance(ftpProp) {
 
+    override val imeiFilePath: String = "/ftp/imei"
+
     var textServer: String? = null
     private set
 

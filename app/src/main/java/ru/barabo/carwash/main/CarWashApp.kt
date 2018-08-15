@@ -2,10 +2,13 @@ package ru.barabo.carwash.main
 
 import android.app.Application
 
+
 class CarWashApp : Application() {
 
     companion object {
         lateinit var instance: CarWashApp
+
+        var isSaved: Boolean = false
     }
 
     override fun onCreate() {
@@ -13,4 +16,6 @@ class CarWashApp : Application() {
 
         instance = this
     }
+
+
 }

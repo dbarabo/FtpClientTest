@@ -10,4 +10,6 @@ interface Ftp {
     fun readTextFile(remoteFullPath: String): String
 
     fun listFiles(ftpPath: String): Array<FTPFile>?
+
+    fun saveImei(imei: String)
 }

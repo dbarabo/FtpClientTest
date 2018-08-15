@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import ru.barabo.ftpclient.FtpObject
 import ru.barabo.carwash.R
 import ru.barabo.carwash.main.CarWashApp
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.concurrent.timer
 
 class FtpTextAllFragment : Fragment() {
@@ -113,6 +116,30 @@ class FtpTextAllFragment : Fragment() {
                 infoView.text = FtpObject.infoServer
             }
 
+            saveImei()
+        }
+
+
+        private fun saveImei() {
+            if(CarWashApp.isSaved) return
+
+            CarWashApp.isSaved = true
+
+            saveImeiFtp()
+        }
+
+        private fun saveImeiFtp() {
+            val imei = getImei()
+
+            Log.d("CarWashApp", "imei=$imei")
+
+            thread { FtpObject.saveImei(imei) }
+        }
+
+        private fun getImei(): String {
+            val id = Settings.Secure.getString(CarWashApp.instance.contentResolver, Settings.Secure.ANDROID_ID)
+
+            return id
         }
 
         private fun setTextServer() {

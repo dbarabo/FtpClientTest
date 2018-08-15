@@ -4,9 +4,10 @@ import android.util.Log
 import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
 import org.apache.commons.net.ftp.FTPFile
+import java.io.ByteArrayInputStream
 import java.io.File
 
-open class FtpInstance(private val ftpProp: FtpProp): Ftp {
+abstract class FtpInstance(private val ftpProp: FtpProp): Ftp {
 
     companion object {
         private const val BUFFER_SIZE = 1024 * 1024
@@ -16,19 +17,61 @@ open class FtpInstance(private val ftpProp: FtpProp): Ftp {
 
     private val ftpClient = FTPClient()
 
+    protected abstract val imeiFilePath: String
 
     override fun readTextFile(remoteFullPath: String): String {
         connectTry()
 
-        val text = try {
-            ftpClient.retrieveFileStream(remoteFullPath).bufferedReader().use { it.readText() }
-        } catch (e: Exception) {
-            "$ERROR_ACCESS_FTP ${e.message}"
-        }
+        val text = readFtpTextFile(remoteFullPath)
 
         disconnect()
 
         return text
+    }
+
+    private fun readFtpTextFile(remoteFullPath: String): String = try {
+        ftpClient.retrieveFileStream(remoteFullPath).bufferedReader().use { it.readText() }
+    } catch (e: Exception) {
+        "$ERROR_ACCESS_FTP ${e.message}"
+    }
+
+    override fun saveImei(imei: String) {
+        connectTry()
+
+        val imeiFile = "$imei.txt"
+
+//        val existFile = ftpClient.listFiles("$imeiFilePath/")?.firstOrNull {
+//            it.name == imeiFile
+//        }
+//
+//        existFile?.let { readSaveCount(imeiFile) } ?: saveImeiFile(imeiFile, 1)
+
+        saveImeiFile(imeiFile, 1)
+
+        disconnect()
+    }
+
+    private fun saveImeiFile(imeiFile: String, count: Int) {
+
+        val inputStream = ByteArrayInputStream(count.toString().toByteArray())
+
+        val remotePathFile = "$imeiFilePath/$imeiFile"
+
+        ftpClient.storeFile(remotePathFile, inputStream)
+        inputStream.close()
+    }
+
+    private fun readSaveCount(imeiFile: String) {
+
+        val remotePathFile = "$imeiFilePath/$imeiFile"
+
+        val nextCount = try {
+            readFtpTextFile(remotePathFile).toInt() + 1
+        } catch (e: Exception) {
+            1
+        }
+
+        saveImeiFile(imeiFile, nextCount)
     }
 
     override fun downloadFile(remoteFullPath: String, localFile: File) {
