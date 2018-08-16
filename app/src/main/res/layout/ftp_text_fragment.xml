@@ -17,57 +17,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Server not found Server not found"
+        android:text="Wait repeat info from server..."
         android:textSize="26sp"
         android:textColor="@color/colorText"
         android:textColorLink="@color/colorHyperLinkServerPhone"
-        android:background="@drawable/info_border"
+        android:background="@drawable/buble_light1080_470"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
         android:autoLink="phone"
     />
-    <Button
-        android:id="@+id/priceButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <LinearLayout
+        android:id="@+id/lastLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/buble_dark1080_517"
         app:layout_constraintTop_toBottomOf="@id/messageTextServer"
-        android:textColor="@color/colorButton"
-        android:background="@drawable/button_border"
-        android:text="@string/price_name"
-        android:textSize="24sp"
-        />
-    <TextView
-        android:id="@+id/infoTextServer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/priceButton"
-        android:textColor="@color/colorInfoPhone"
-        android:gravity="center"
-        android:background="@color/colorBackgroundInfoPhone"
-        android:text="INFORMATION..."
-        android:textSize="24sp"
-    />
-    <TextView
-        android:id="@+id/phoneTextServer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/infoTextServer"
-        android:background="@color/colorBackgroundInfoPhone"
-        android:gravity="center"
-        android:text="PHONE..."
-        android:autoLink="phone"
-        android:textColor="@color/colorInfoPhone"
-        android:textColorLink="@color/colorHyperLinkInfoPhone"
-        android:textSize="24sp" />
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true">
+
+        <Button
+            android:id="@+id/priceButton"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_border"
+            android:text="@string/price_name"
+            android:textSize="24sp"
+            android:layout_width="150dp"
+            style="@style/AppTheme.RoundedCornerMaterialButton"/>
+        <TextView
+            android:id="@+id/infoTextServer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/priceButton"
+            android:textColor="@color/colorInfoPhone"
+            android:gravity="center"
+            android:text="INFORMATION..."
+            android:textSize="24sp"
+            android:textColorLink="@color/colorHyperLinkInfoPhone"
+            android:autoLink="phone"
+            />
+    </LinearLayout >
 
     <ImageView
         android:id="@+id/fotoWash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/phoneTextServer"
+        app:layout_constraintTop_toBottomOf="@id/lastLayout"
         android:scaleType="fitStart"
         app:srcCompat="@drawable/fotowash"
     />
