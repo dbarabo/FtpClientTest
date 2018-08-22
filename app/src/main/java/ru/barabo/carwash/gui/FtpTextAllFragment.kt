@@ -1,22 +1,25 @@
 package ru.barabo.carwash.gui
 
 import android.content.Intent
+import android.graphics.*
 import android.os.AsyncTask
-import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.provider.Settings
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
-import ru.barabo.ftpclient.FtpObject
 import ru.barabo.carwash.R
 import ru.barabo.carwash.main.CarWashApp
+import ru.barabo.ftpclient.FtpObject
 import java.util.*
 import kotlin.concurrent.thread
 import kotlin.concurrent.timer
+
 
 class FtpTextAllFragment : Fragment() {
 
@@ -55,6 +58,28 @@ class FtpTextAllFragment : Fragment() {
         priceButton?.setOnClickListener {
             showViewPrice()
         }
+
+        roundImageView(viewFragment)
+    }
+
+    private fun roundImageView(viewFragment: View) {
+        val imageView = viewFragment.findViewById<ImageView>(R.id.fotoWash)
+
+
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.fotowash)
+        val imageRounded = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+        val canvas = Canvas(imageRounded)
+        val paint = Paint()
+        paint.isAntiAlias = true
+        paint.shader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        canvas.drawRoundRect(RectF(0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat()), 100F, 100F, paint)// Round Image Corner 100 100 100 100
+        imageView.setImageBitmap(imageRounded)
+
+
+//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.fotowash)
+//        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap)
+//        roundedBitmapDrawable.isCircular = true
+//        imageView.setImageDrawable(roundedBitmapDrawable)
     }
 
     private fun showViewPrice() {
