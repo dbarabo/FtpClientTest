@@ -5,21 +5,20 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="ru.barabo.carwash.main.CarWashApp"
+        android:name=".main.CarWashApp"
         android:allowBackup="true"
-        android:icon="@drawable/ico72"
+        android:icon="@mipmap/ic_launcher"
         android:label="Автомойка ТЦ «Стройматериалы"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ru.barabo.carwash.gui.MainActivity">
+        <activity android:name=".gui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.barabo.carwash.gui.PriceActivity"></activity>
+        <activity android:name=".gui.PriceActivity"></activity>
     </application>
 
 </manifest>
